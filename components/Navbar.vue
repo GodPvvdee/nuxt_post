@@ -6,7 +6,7 @@
           <img
             src="https://bulma.io/images/bulma-logo.png"
             alt="Lalriin logogogogogogo"
-          />
+          >
         </a>
         <div
           class="navbar-burger burger"
@@ -14,20 +14,24 @@
           aria-expanded="false"
           data-target="navMenu"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span />
+          <span />
+          <span />
         </div>
       </div>
-      <div id="navMenu" class="navbar-menu">
+      <div @click="isActive =!isActive" id="navMenu" class="navbar-menu">
         <div class="navbar-end">
-          <div class="navbar-item has-dropdown">
-            <a class="navbar-link">Menu</a>
+          <div
+            :class="{'is-active': isActive}"
+            class="navbar-item has-dropdown ">
+            <a class="navbar-link">Цэс</a>
             <div class="navbar-dropdown">
-              <a class="navbar-item">Dashboard</a>
-              <a class="navbar-item">Profile</a>
-              <hr class="navbar-divider" />
-              <div class="navbar-item">Log out</div>
+              <nuxt-link to="/" class=" navbar-item">Нүүр</nuxt-link>
+              <nuxt-link to="/manage" class=" navbar-item">Удирдах</nuxt-link>
+<!--              <hr class="navbar-divider">-->
+<!--              <div class="navbar-item">-->
+<!--                Log out-->
+<!--              </div>-->
             </div>
           </div>
         </div>
@@ -37,7 +41,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      isActive: false
+    }
+  }
+}
 </script>
 
 <style></style>
