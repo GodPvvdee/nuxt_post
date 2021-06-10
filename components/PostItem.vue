@@ -1,17 +1,16 @@
 <template>
   <div class="post">
     <div class="post-content">
-    <a class="post-header post-header-link clickable">
-      <h4 class="title is-4"> {{title}} <br> Гарчиг</h4>
-      <h5 class="subtitle is-5"> {{subtitle}}  <br> Дэд гарчиг</h5>
-    </a>
-    <div class="post-footer">
-      by Pvrew-Erdene, {{formatDate()}}
-      <br>
-    </div>
+      <a class="post-header post-header-link clickable">
+        <h4 class="title is-4">{{ title }}</h4>
+        <h5 class="subtitle is-5">{{ subtitle }}</h5>
+      </a>
+      <div class="post-footer">
+        by Пүрэв-Эрдэнэ, {{ date | formatDate }}
+      </div>
     </div>
     <div class="post-right">
-      <label class="checkbox">
+      <label class="check-box">
         <input type="checkbox" :checked="isRead">
         Унших
       </label>
@@ -20,16 +19,16 @@
 </template>
 
 <script>
-import moment from 'moment'
+import 'moment/locale/mn'
 export default {
   props: {
     title: {
       type: String,
-      require: true
+      required: true
     },
     subtitle: {
       type: String,
-      require: false
+      required: false
     },
     date: {
       type: Date,
@@ -42,46 +41,49 @@ export default {
     }
   },
   methods: {
-
-    formatDate () {
-      return moment(this.date).format('LL')
-    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.post-footer{
-  font-style: italic;
-}
-.post-content {
-  flex:1;
-}
-.post {
 
-  margin-bottom: 20px;
-  padding: 5px;
-  border-bottom: 2px solid transparent;
-  display: flex;
-  flex-direction: row;
-  &-content{
-    flex: 1;
+  .post {
+    margin-bottom: 20px;
+    padding: 5px;
+    border-bottom: 2px solid transparent;
+    display: flex;
+    flex-direction: row;
+    &-footer{
+      font-style: italic;
+    }
+    &-content{
+      flex: 1;
+    }
+    &-right{
+      float: right;
+      justify-content: flex-end;
+      align-self: center;
+    }
+    &:hover{
+      border-bottom: 2px solid #e8e8e8;
+      color: teal;
+    }
   }
-  &-right{
-    float: right;
-    justify-content: flex-end;
-    align-self:center;
+  a{
+    text-decoration: none;
   }
-  &:hover{
-  border-bottom: 2px solid #e8e8e8;
-}
-}
-.post-right{
-  float: right;
-  justify-content: flex-end;
-  align-self: center;
-}
-.post:hover {
-  border-bottom: 2px solid #e8e8e8;
-}
+  //.post-footer {
+  //  font-style: italic;
+  //}
+  //.post-content{
+  //  flex: 1;
+  //}
+  //.post-right{
+  //  float: right;
+  //  justify-content: flex-end;
+  //  align-self: center;
+  //}
+  //.post:hover {
+  //  border-bottom: 2px solid #e8e8e8;
+  //}
 </style>

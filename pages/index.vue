@@ -1,11 +1,10 @@
 <template>
   <div>
+    <navbar />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
-    />
-    <navbar />
-    <manage/>
+    >
     <div class="blogs-page">
       <div class="main-content">
         <div class="container">
@@ -14,45 +13,67 @@
               <div class="section">
                 <div class="title">
                   <h1>Шинэ мэдээ</h1>
-                  <hr />
+                  <hr>
                 </div>
                 <post-item
                   v-for="post in posts"
                   :key="post._id"
                   :title="post.title"
                   :subtitle="post.subtitle"
-                  :date="post.date"
-                  :isRead="post.isRead"
+                  :date="post.createdAt"
+                  :is-read="post.isRead"
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
-<!--      <form>-->
-<!--        -->
-<!--      </form>-->
+      {{ isFormValid }}
     </div>
   </div>
 </template>
 
 <script>
-// import Postitem from "~/components/PostItem.vue";
-// import Postitem from "~/components/PostItem.vue";
-export default {
+// import { fetchPostsAPI} from '~/store/post'
 
+export default {
   data () {
     return {
-      title: 'hi'
+      title: ' Миний гарчиг',
+      form: {
+        title: '',
+        subtitle: ''
+      }
     }
   },
+  fetch ({ store }) {
+    if (store.getters['post/hasEmptyItems']) {
+      console.log('fetching data index page')
+      return store.dispatch('post/fetchPosts')
+    }
+  },
+  // async asyncData () {
+  //   const posts = await fetchPostsAPI();
+  //   return { posts }
+  // }
   computed: {
     posts () {
-      return this.$store.state.posts
+      return this.$store.state.post.items
+    },
+    isFormValid () {
+      // console.log('isForm valid has been called')
+      if (this.title) {
+        return true
+      } else {
+        return false
+      }
     }
   }
+  // mounted () {
+  //   this.$store.dispatch('post/fetchPosts')
+  // }
 }
 </script>
-<style>
 
+<style scoped>
 </style>
